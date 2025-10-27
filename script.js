@@ -27,6 +27,7 @@ let currentImdbID = "", currentType = "", totalSeasons = 1, currentEpisode = 1, 
 document.addEventListener("keydown", e=>{if(e.key==="/"){e.preventDefault(); searchInput.focus();}});
 searchBtn.addEventListener("click", searchTitle);
 searchInput.addEventListener("input", showAutocomplete);
+searchInput.addEventListener("blur", ()=>{ setTimeout(()=>{autocompleteDiv.innerHTML="";},100); });
 playEpisodeBtn.addEventListener("click", playEpisode);
 applyFiltersBtn.addEventListener("click", searchTitle);
 
@@ -48,13 +49,11 @@ async function searchTitle(){
     if(data.Response==="False") throw new Error("No results found");
     let items = data.Search;
 
-    // Filter by type
     const typeFilter = filterType.value;
     if(typeFilter!=="all") items = items.filter(i=>i.Type===typeFilter);
     const yearFilter = filterYear.value;
     if(yearFilter) items = items.filter(i=>i.Year.includes(yearFilter));
 
-    // Sort
     if(sortBy.value==="title") items.sort((a,b)=>a.Title.localeCompare(b.Title));
     else if(sortBy.value==="year") items.sort((a,b)=>b.Year.localeCompare(a.Year));
 
@@ -161,6 +160,8 @@ async function showAutocomplete(){
       div.onclick = ()=>{ searchInput.value=item.Title; searchTitle(); autocompleteDiv.innerHTML=""; };
       autocompleteDiv.appendChild(div);
     });
+    autocompleteDiv.style.top = (searchInput.offsetTop + searchInput.offsetHeight) + "px";
+    autocompleteDiv.style.left = searchInput.offsetLeft + "px";
   }catch{}
 }
 
