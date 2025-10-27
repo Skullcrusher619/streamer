@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>My Personal Streamer</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="sidebar" id="sidebar">
+  <button class="toggle" onclick="toggleSidebar()">☰ Menu</button>
+  <h2>Library</h2>
+  <div class="section">
+    <h3>Favorites</h3>
+    <div id="favorites"></div>
+  </div>
+  <div class="section">
+    <h3>Recently Watched</h3>
+    <div id="recent"></div>
+  </div>
+</div>
+
+<div class="main">
+  <h1>🎬 My Personal Streamer</h1>
+  
+  <!-- Search -->
+  <div class="search-box">
+    <input type="text" id="titleInput" placeholder="Search movies or TV shows...">
+    <button id="searchBtn">Search</button>
+  </div>
+  <div id="autocomplete"></div>
+  
+  <!-- Sorting & Filtering -->
+  <div class="filters">
+    <select id="filterType">
+      <option value="all">All Types</option>
+      <option value="movie">Movie</option>
+      <option value="series">Series</option>
+    </select>
+    <input type="number" id="filterYear" placeholder="Year">
+    <select id="sortBy">
+      <option value="title">Title</option>
+      <option value="year">Year</option>
+      <option value="imdb">IMDB Rating</option>
+    </select>
+    <button id="applyFilters">Apply</button>
+  </div>
+  
+  <div id="loading"></div>
+  <div id="error"></div>
+  <div id="results"></div>
+  <div id="details" class="clearfix"></div>
+  
+  <!-- TV Season & Episode Selector -->
+  <div id="tvSelector" style="display:none;">
+    <select id="seasonSelect"></select>
+    <select id="episodeSelect"></select>
+    <button id="playEpisodeBtn">▶ Play Episode</button>
+  </div>
+
+  <!-- Video Player -->
+  <div class="video-container" id="player"></div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
